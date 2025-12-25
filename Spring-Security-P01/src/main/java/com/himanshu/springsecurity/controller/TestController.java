@@ -1,23 +1,24 @@
 package com.himanshu.springsecurity.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
-//
-//    @GetMapping("/test")
-//    public ResponseEntity<String> testEndPoint()
-//    {
-//        return ResponseEntity.ok("Hello World");
-//    }
-//
-//    @GetMapping("/admin/test")
-//    public ResponseEntity<String> testAdminEndPoint()
-//    {
-//        return ResponseEntity.ok("Hello Admin");
-//    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> testEndPoint()
+    {
+        return ResponseEntity.ok("Hello World");
+    }
+
+    @GetMapping("/admin/test")
+    public ResponseEntity<String> testAdminEndPoint()
+    {
+        return ResponseEntity.ok("Hello Admin");
+    }
 
 
     @GetMapping("/contactUS")
@@ -43,5 +44,17 @@ public class TestController {
     @GetMapping("/transfer")
     public ResponseEntity<String> transferFunds() {
         return ResponseEntity.ok("Funds transferred successfully");
+    }
+
+    @GetMapping("/admin/dashboard")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> adminDashboard() {
+        return ResponseEntity.ok("Welcome to the Admin Dashboard");
+    }
+
+    @GetMapping("/user/dashboard")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<String> userDashboard() {
+        return ResponseEntity.ok("Welcome to the User Dashboard");
     }
 }
