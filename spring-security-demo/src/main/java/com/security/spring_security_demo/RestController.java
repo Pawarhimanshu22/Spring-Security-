@@ -10,7 +10,8 @@ public class RestController {
         return "Hello, World!" + request.getSession().getId();
     }
     @GetMapping("/about")
-    public String about(HttpServletRequest request) {
+    public String about(HttpServletRequest request)
+    {
         return "This is a Spring Security Demo Application."+ request.getSession().getId();
     }
 }
